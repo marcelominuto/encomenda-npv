@@ -1,0 +1,179 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+strong{
+    font-weight: 700;
+}
+
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: aquamarine;
+}
+
+#logo-npv{
+    width: 100px;
+}
+
+.encomenda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.informations{
+    background-color: rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 980px) {
+    .informations{
+        background-color: rgba(0, 0, 0, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 10px;
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .textfield > input {
+        width: 50%;
+        border: none;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+
+    .marketplaces {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+    }
+}
+
+.textfield{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.textfield > label {
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.textfield > input {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.results {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.marketplaces {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 200px;
+}
+
+.marketContainer{
+    background-color: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.droperInfo{
+    margin-right: 5px;
+}
+
+.stockInfo{
+    margin-left: 5px;
+}
+
+.marketContainer > img {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.cotarBtn {
+    margin: 10px;
+    width: 30%;
+    padding: 15px;
+    border: none;
+    background-color: rgb(42, 149, 211);
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.cotarBtn:hover{
+    background-color: rgb(20, 114, 168);
+}
+
+.message{
+    width: 100%;
+    background-color: green;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.text{
+    width: 100%;
+    padding: 10px;
+}
+
+.copy{
+    padding: 10px;
+}
