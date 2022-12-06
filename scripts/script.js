@@ -1,8 +1,11 @@
 const url = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
 
 const formRef = document.querySelector("form");
+
+const copyRef = document.getElementById("copyBtn");
 const messageRef = document.getElementById("messageText");
 const resultRef = document.getElementById("messageResult");
+const toastRef = document.querySelector(".toast");
 
 const salesTaxPercentage = 0.08;
 const stockProcFeePercentage = 0.045;
@@ -47,9 +50,6 @@ formRef.addEventListener("submit", (event) => {
 
     const finalStockPriceParcelado = (finalStockPrice * 0.2) + finalStockPrice
 
-    console.log("PIX:" + finalStockPrice);
-    console.log("Parcelado:" + finalStockPriceParcelado);
-
     // Calculos Droper
     const droperPrice = parseFloat(droperPriceInput.value);
 
@@ -78,17 +78,29 @@ formRef.addEventListener("submit", (event) => {
     + "<br><br>TRAZENDO DE FORA<br><br>PIX: R$" + roundNum(finalStockPrice) 
     + "<br>Parcelado: R$" + roundNum(finalStockPriceParcelado) +
     "<br><br>BRASIL<br><br>PIX: R$" + roundNum(pixDroperPrice) + "<br>Parcelado: R$" + roundNum(parceladoDroperPrice)
-
-    console.log(roundNum(pixDroperPrice));
-    
-    console.log(messageRef.innerHTML)
-
-    let copyM = messageRef.innerHTML.replaceAll("<br>", "\n")
-    console.log(copyM);
-
-    navigator.clipboard.writeText(copyM)
         
 })
+
+copyRef.addEventListener("click", () => {
+    let copyM = messageRef.innerHTML.replaceAll("<br>", "\n")
+
+    navigator.clipboard.writeText(copyM)
+    toast("Topate")
+})
+
+function toast(message){
+    toastRef.textContent = message;
+
+    toastRef.style.opacity = 1
+    toastRef.style.visibility = 'visible'
+    setTimeout(() => {
+        toastRef.style.opacity = 0
+        setTimeout(() => {
+            toastRef.style.visibility = 'hidden'
+            toastRef.textContent = ""
+        }, 500)
+    }, 1000) 
+}
 
 function roundNum(x) {
     x.toFixed(1)
