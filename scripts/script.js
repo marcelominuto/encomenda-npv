@@ -4,6 +4,7 @@ const formRef = document.querySelector("form");
 
 const copyRef = document.getElementById("copyBtn");
 const messageRef = document.getElementById("messageText");
+const messageBoxRef = document.querySelector(".message");
 const resultRef = document.getElementById("messageResult");
 const toastRef = document.querySelector(".toast");
 
@@ -78,6 +79,8 @@ formRef.addEventListener("submit", (event) => {
     + "<br><br>TRAZENDO DE FORA<br><br>PIX: R$" + roundNum(finalStockPrice) 
     + "<br>Parcelado: R$" + roundNum(finalStockPriceParcelado) +
     "<br><br>BRASIL<br><br>PIX: R$" + roundNum(pixDroperPrice) + "<br>Parcelado: R$" + roundNum(parceladoDroperPrice)
+
+    messageBoxRef.style.display = "flex";
         
 })
 
@@ -85,7 +88,7 @@ copyRef.addEventListener("click", () => {
     let copyM = messageRef.innerHTML.replaceAll("<br>", "\n")
 
     navigator.clipboard.writeText(copyM)
-    toast("Topate")
+    toast("Mensagem Copiada!")
 })
 
 function toast(message){
