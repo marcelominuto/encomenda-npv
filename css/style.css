@@ -7,6 +7,10 @@ strong{
     font-weight: 700;
 }
 
+input{
+    font-size: 1rem;
+}
+
 .wrapper{
     padding: 1rem;
     width: 100vw;
@@ -164,11 +168,36 @@ form{
     position: fixed;
     border-radius: .5rem;
     padding: 1rem;
-    background-color: blueviolet;
+    background-color: rgba(131,75,152,255);
     color: white;
     text-align: center;
     width: 20rem;
     transition: opacity 0.5s linear;
+}
+
+.usdContainer{
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 1rem;
+    border-radius: .5rem;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#loadingIcon{
+    animation-name: spin;
+    animation-duration:3000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media screen and (min-width: 980px) {

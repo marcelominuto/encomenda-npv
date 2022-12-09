@@ -18,6 +18,11 @@
   <div class="wrapper">
     <img src="./images/logo npv transparente.png" alt="logo-npv" id="logo-npv">
 
+    <div class="usdContainer">
+      <span id="usd">Valor Dolár: <strong style="color: lightgray">
+        <i class="fa-solid fa-spinner" id="loadingIcon"></i></strong></span>
+    </div>
+
     <div class="encomenda">
       <form>
         <div class="informations">
@@ -33,17 +38,17 @@
 
           <div class="textfield">
             <label for="tamanhoTenis">Tamanho</label>
-            <input type="number" min="30" max="54" placeholder="38" id="sizeSneaker" required>
+            <input type="number" min="30" max="54" placeholder="38" id="sizeSneaker" required step="0.01">
           </div>
           
           <div class="textfield">
-            <label for="shipping" min="0">Frete</label>
-            <input type="number" id="shippingInput" placeholder="Frete" value="50" required> 
+            <label for="shipping" min="0">Frete (BRL)</label>
+            <input type="number" id="shippingInput" placeholder="Frete" value="50" required step="0.01"> 
           </div>
 
           <div class="textfield">
             <label for="price">Margem em %</label>
-            <input type="number" id="marginProfitInput" placeholder="Margem de lucro" min="0" value="20" required>
+            <input type="number" id="marginProfitInput" placeholder="Margem de lucro" min="0" value="20" required step="0.01">
           </div>
         </div>
 
@@ -52,7 +57,7 @@
             <img src="./images/droper.png" alt="droper-logo" id="logoDroper">
             <div class="textfield">
               <label for="price" min="0">Preço em BRL</label>
-              <input type="number" id="droperPriceInput" value="1000"> 
+              <input type="number" id="droperPriceInput" value="1000" step="0.01"> 
 
               <div class="results">
                 <span id="totalDroper">Valor Total:</span>
@@ -67,11 +72,25 @@
             
             <div class="textfield">
               <label for="price" min="0">Preço em USD</label>
-              <input type="number" id="stockPriceInput" value="200">
+              <input type="number" id="stockPriceInput" value="200" step="0.01">
               
               <div class="results">
                 <span id="totalStock">Valor Total:</span>
                 <span id="lucroStock">Lucro:</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="marketContainer goatInfo">
+            <img src="./images/goat.png" alt="goat-logo" id="logoGoat">
+            
+            <div class="textfield">
+              <label for="price" min="0">Preço em USD</label>
+              <input type="number" id="goatPriceInput" value="200" step="0.01">
+              
+              <div class="results">
+                <span id="totalGoat">Valor Total:</span>
+                <span id="lucroGoat">Lucro:</span>
               </div>
             </div>
           </div>

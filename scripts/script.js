@@ -7,10 +7,16 @@ const messageRef = document.getElementById("messageText");
 const messageBoxRef = document.querySelector(".message");
 const resultRef = document.getElementById("messageResult");
 const toastRef = document.querySelector(".toast");
+const stockRef = document.querySelector(".stockInfo");
+const goatRef = document.querySelector(".goatInfo");
 
 const salesTaxPercentage = 0.08;
 const stockProcFeePercentage = 0.045;
 const stockShippingUSD = 14.95;
+
+const taxGoat = 0.075;
+const goatShippingUSD = 14.50;
+
 const redirectShippingUSD = 50;
 
 let priceUSD;
@@ -28,7 +34,7 @@ formRef.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const { clientName, modelSneaker, sizeSneaker, 
-        marginProfitInput, droperPriceInput, shippingInput, stockPriceInput } 
+        marginProfitInput, droperPriceInput, shippingInput, stockPriceInput, goatPriceInput } 
         = formRef.elements
     
     const nomeCliente = clientName.value;
@@ -46,8 +52,7 @@ formRef.addEventListener("submit", (event) => {
     const usStockPrice = stockPrice + salesTax + procFee + redirectShippingUSD + stockShippingUSD
     const brStockPrice = usStockPrice * priceUSD;
 
-    const brStockPriceShipping = brStockPrice + shipping
-    const finalStockPrice = (brStockPriceShipping * (marginProfit/100)) + brStockPriceShipping
+    const finalStockPrice = (brStockPrice * (marginProfit/100)) + brStockPrice
 
     const finalStockPriceParcelado = (finalStockPrice * 0.2) + finalStockPrice
 
@@ -58,6 +63,16 @@ formRef.addEventListener("submit", (event) => {
     const pixDroperPrice = droperPriceShipping + (droperPriceShipping * marginProfit/100)
     const parceladoDroperPrice = pixDroperPrice + (pixDroperPrice * 0.2)
 
+    // Calculos Goat
+    const goatPrice = parseFloat(goatPriceInput.value);
+
+    const goatTax = goatPrice * taxGoat;
+    const usGoatPrice = goatPrice + goatTax + goatShippingUSD + redirectShippingUSD
+    const brGoatPrice = usGoatPrice * priceUSD;
+
+    const pixGoatPrice = (brGoatPrice * (marginProfit/100) + brGoatPrice);
+    const parceladoGoatPrice = pixGoatPrice + (pixGoatPrice * 0.2);
+
     // Mostra lucro, valor pago total
     const totalDroperRef = document.getElementById("totalDroper");
     const lucroDroperRef = document.getElementById("lucroDroper");
@@ -65,20 +80,41 @@ formRef.addEventListener("submit", (event) => {
     const totalStockRef = document.getElementById("totalStock");
     const lucroStockRef = document.getElementById("lucroStock");
 
+    const totalGoatRef = document.getElementById("totalGoat");
+    const lucroGoatRef = document.getElementById("lucroGoat");
+
     const lucroDroper = (pixDroperPrice - droperPriceShipping).toFixed(2)
-    const lucroStock = (finalStockPrice - brStockPriceShipping).toFixed(2)
+    const lucroStock = (finalStockPrice - brStockPrice).toFixed(2)
+    const lucroGoat = (pixGoatPrice - brGoatPrice).toFixed(2)
 
     totalDroperRef.innerHTML = "Valor Total: <strong>R$" + droperPriceShipping.toFixed(2)
     lucroDroperRef.innerHTML = "Lucro: <strong style='color: green'>R$ " + lucroDroper
 
-    totalStockRef.innerHTML = "Valor Total: <strong>R$" + brStockPriceShipping.toFixed(2)
+    totalStockRef.innerHTML = "Valor Total: <strong>R$" + brStockPrice.toFixed(2)
     lucroStockRef.innerHTML = "Lucro: <strong style='color: green'>R$" + lucroStock
 
-    // Gera a mensagem para copiar
-    messageRef.innerHTML = nomeCliente + ", segue a cotação para encomendar " + sneakerModel + " tamanho " + sneakerSize 
-    + "<br><br>TRAZENDO DE FORA<br><br>PIX: R$" + roundNum(finalStockPrice) 
-    + "<br>Parcelado: R$" + roundNum(finalStockPriceParcelado) +
-    "<br><br>BRASIL<br><br>PIX: R$" + roundNum(pixDroperPrice) + "<br>Parcelado: R$" + roundNum(parceladoDroperPrice)
+    totalGoatRef.innerHTML = "Valor Total: <strong>R$" + brGoatPrice.toFixed(2)
+    lucroGoatRef.innerHTML = "Lucro: <strong style='color: green'>R$" + lucroGoat
+
+    if(pixGoatPrice > finalStockPrice){
+        // Gera a mensagem para StockX
+        messageRef.innerHTML = nomeCliente + ", segue a cotação para encomendar " + sneakerModel + " tamanho " + sneakerSize 
+        + "<br><br>TRAZENDO DE FORA<br><br>PIX: R$" + roundNum(finalStockPrice) 
+        + "<br>Parcelado: R$" + roundNum(finalStockPriceParcelado) +
+        "<br><br>BRASIL<br><br>PIX: R$" + roundNum(pixDroperPrice) + "<br>Parcelado: R$" + roundNum(parceladoDroperPrice)
+        stockRef.style.border = "solid green 0.15rem"
+        goatRef.style.border = "none" 
+    } else {
+        // Gera a mensagem para Goat
+        messageRef.innerHTML = nomeCliente + ", segue a cotação para encomendar " + sneakerModel + " tamanho " + sneakerSize 
+        + "<br><br>TRAZENDO DE FORA<br><br>PIX: R$" + roundNum(pixGoatPrice) 
+        + "<br>Parcelado: R$" + roundNum(parceladoGoatPrice) +
+        "<br><br>BRASIL<br><br>PIX: R$" + roundNum(pixDroperPrice) + "<br>Parcelado: R$" + roundNum(parceladoDroperPrice)
+        goatRef.style.border = "solid green 0.15rem"
+        stockRef.style.border = "none" 
+    }
+
+
 
     messageBoxRef.style.display = "flex";
         
@@ -102,7 +138,7 @@ function toast(message){
             toastRef.style.visibility = 'hidden'
             toastRef.textContent = ""
         }, 500)
-    }, 1000) 
+    }, 3000) 
 }
 
 function roundNum(x) {
@@ -111,3 +147,10 @@ function roundNum(x) {
   }
 
 getUSD()
+const usdRef = document.getElementById("usd");
+
+setTimeout(() =>{
+    const loadingIcon = document.getElementById("loadingIcon");
+    loadingIcon.style.display = "none";
+    usdRef.innerHTML = "Valor Dolár: <strong style='color: green'>R$" + priceUSD.toFixed(2); 
+}, 1000)
