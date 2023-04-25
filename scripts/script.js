@@ -124,7 +124,8 @@ formRef.addEventListener("submit", (event) => {
         goatRef.style.border = "none"
 
         addField(orderMsg, ":white_check_mark: StockX:", "Preço em USD: $" + stockPrice + "\nValor Total: R$" + brStockPrice.toFixed(2) + "\nLucro: R$" + lucroStock)
-        addField(orderMsg, "Goat:", "Preço em USD: $" + goatPrice + "\nValor Total: R$" + brGoatPrice.toFixed(2) + "\nLucro: R$" + lucroGoat) 
+        addField(orderMsg, "Goat:", "Preço em USD: $" + goatPrice + "\nValor Total: R$" + brGoatPrice.toFixed(2) + "\nLucro: R$" + lucroGoat)
+        addField(orderMsg, "Trazendo de fora:", "Parcelado: R$" + roundNum(finalStockPriceParcelado) + "\nPIX: R$" + roundNum(finalStockPrice))
     } else {
         // Gera a mensagem para Goat
         messageRef.innerHTML = nomeCliente + ", segue a cotação para encomendar " + sneakerModel + " tamanho " + sneakerSize 
@@ -135,11 +136,14 @@ formRef.addEventListener("submit", (event) => {
         stockRef.style.border = "none"
 
         addField(orderMsg, "StockX:", "Preço em USD: $" + stockPrice + "\nValor Total: R$" + brStockPrice.toFixed(2) + "\nLucro: R$" + lucroStock)
-        addField(orderMsg, ":white_check_mark: Goat:", "Preço em USD: $" + goatPrice + "\nValor Total: R$" + brGoatPrice.toFixed(2) + "\nLucro: R$" + lucroGoat) 
+        addField(orderMsg, ":white_check_mark: Goat:", "Preço em USD: $" + goatPrice + "\nValor Total: R$" + brGoatPrice.toFixed(2) + "\nLucro: R$" + lucroGoat)
+        addField(orderMsg, "Trazendo de fora:", "Parcelado: R$" + roundNum(parceladoGoatPrice) + "\nPIX: R$" + roundNum(pixGoatPrice))
     }
 
     messageBoxRef.style.display = "flex";
     
+    //Adiciona na msg o preço da Droper
+    addField(orderMsg, "Brasil:", "Parcelado: R$" + roundNum(parceladoDroperPrice) + "\nPIX: R$" + roundNum(pixDroperPrice))
     sendWebhook(orderMsg);
 
 })
